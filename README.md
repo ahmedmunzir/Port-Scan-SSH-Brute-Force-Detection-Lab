@@ -21,6 +21,8 @@ Key areas covered in this lab:
 
 The lab was built using a small Proxmox virtual environment.
 
+<img src="images/vmbr1.png" alt="Alt Text" width="600" height="400">
+
 **Attacker**
 - Kali Linux
 
@@ -59,6 +61,8 @@ This environment ensured that all attack traffic stayed inside the lab.
 
 ## Part 1 — Stealth SYN Scan Analysis
 
+<img src="images/nmap1.png" alt="Alt Text" width="600" height="400">
+
 A stealth SYN scan was launched from Kali while capturing traffic on the Ubuntu server using `tcpdump`.
 
 The capture was transferred to Kali and analysed in Wireshark.
@@ -77,6 +81,8 @@ SYN → SYN/ACK → RST
 
 This sequence confirms how a **half open SYN scan works**.
 
+<img src="images/wsfilter1.png" alt="Alt Text" width="550" height="500">
+<img src="images/wsfilter2.png" alt="Alt Text" width="550" height="500">
 Key characteristics:
 
 - The scanner confirms the port is open
@@ -94,6 +100,7 @@ The scan was repeated using a **TCP connect scan**.
 ```
 nmap -sT
 ```
+<img src="images/nmapst.png" alt="Alt Text" width="600" height="400">
 
 Traffic was captured again using `tcpdump` and analysed in Wireshark.
 
@@ -106,6 +113,9 @@ SYN → SYN/ACK → ACK
 ```
 
 Additional packets were exchanged before the connection closed.
+
+<img src="images/wsfilter4.png" alt="Alt Text" width="550" height="500">
+<img src="images/wsfilter5.png" alt="Alt Text" width="550" height="500">
 
 ### Key Differences from SYN Scan
 
@@ -129,6 +139,8 @@ Firewall configuration:
 
 Another SYN scan was performed while capturing packets.
 
+<img src="images/nmapfirewall.png" alt="Alt Text" width="600" height="400">
+
 ### Observations
 
 The behaviour changed significantly.
@@ -138,6 +150,9 @@ The behaviour changed significantly.
 - Nmap reported **999 filtered ports**
 - SYN retransmissions increased
 - The scan took **significantly longer**
+
+<img src="images/wsfilter6.png" alt="Alt Text" width="550" height="500">
+<img src="images/wsfilter7.png" alt="Alt Text" width="550" height="500">
 
 ### What this demonstrates
 
@@ -162,6 +177,7 @@ Log file analysed:
 ```
 /var/log/auth.log
 ```
+<img src="images/passwords.png" alt="Alt Text" width="600" height="400">
 
 ### Observations
 
@@ -205,14 +221,3 @@ Skills developed during the lab:
 - Understanding firewall impact on scans
 - Investigating authentication logs
 - Recognising brute force attack indicators
-
----
-
-## Evidence
-
-The project includes screenshots showing:
-
-- Nmap scan behaviour
-- Wireshark packet analysis
-- Firewall filtered traffic behaviour
-- SSH authentication log entries
